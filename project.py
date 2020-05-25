@@ -1,13 +1,10 @@
-﻿# coding=<utf-8>
-import matplotlib
-matplotlib.use('Agg')
 import numpy as np
 import pandas as pd
 import re
 from konlpy.tag import Komoran
 from keras.preprocessing.text import Tokenizer
 from keras.models import Sequential 
-from tensorflow.keras import layers
+from keras.layers import *
 import os
 from keras.preprocessing.sequence import pad_sequences
 from sklearn.utils import shuffle

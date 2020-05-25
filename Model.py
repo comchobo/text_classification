@@ -1,4 +1,4 @@
-﻿# coding=<utf-8>
+# coding=<utf-8>
 import pandas as pd
 import numpy as np
 import re
@@ -6,37 +6,37 @@ from keras.preprocessing.sequence import pad_sequences
 
 def put(token, sentence, mc):  
         sentence2 = []
-        sentence.replace('.','').replace(',','').replace('~','').replace('"','') #문장의 잡다한 기호 제거
+        sentence.replace('.','').replace(',','').replace('~','').replace('"','')
         sentence2 = mc.morphs(sentence)
-        if len(sentence2)<2: #만약 문장이 토큰 단 하나로 구성되어있을 경우
-            output= token.texts_to_sequences(sentence) #형태소 분석기 미사용
-            output=pad_sequences(output, 30)
-        else:
-            output= token.texts_to_sequences(sentence2)
-            output=pad_sequences(output, 30) #그 외엔 정상적으로 분석
-        output = np.array(output) #모델에 넣기 위해 행렬로 변환
+        #if len(sentence2)<2:
+        #    output= token.texts_to_sequences(sentence)
+        #else:
+        output= token.texts_to_sequences(sentence2)
+        output = np.array(output)
         return output
 
 # 결과 변환 함수
 def convert(input):
     result = np.argmax(input, axis=1)
     return result
-# predict 함수
-def out(sentence, model) :
-    #기본처리
-    final=np.array([])
 
-    try:
+def out(sentence, model) :
+        #기본처리
+        final=np.array([])
         k=0
+        
+        #sentence의 원소를 체크합니다.
         for nums in sentence:
-            if any(nums) == False:
-                   continue #단어가 wordindex(학습한 단어 내용)에 없을 경우 건너뜀
-            final=np.append(final,nums) # 그 외에는 final 행렬에 삽입
-            k=k+1
+                if any(nums) == False:
+                        continue     #원소가 0 (OutOfVocabulary) 이면 건너뜁니다.
+                final=np.append(final,nums) # 토큰에 있는 단어면 추가합니다.
+                k=k+1 # 추가된 단어의 개수입니다.
+        if k == 0 :
+                return [5] #모든 단어가 토큰 리스트에 없는 단어이거나, 길이가 0인 문장이면 "예외"를 출력합니다.
         final2=np.array([])
         final2=np.append(final2,final)
-        final2=final2.reshape(k,30) # 모델에 넣기 위해 final을 재조립
-        return convert(model.predict(final2))
-
-    except:
-        return [5] #에러가 발생했을 경우 예외 리턴
+        zero = np.zeros((30-k, 1)) 
+        final2 = np.append(zero, final2) #padding과 유사한 효과입니다.
+        final2=final2.reshape(30,1) # 길이 30의 문장을 만들기 위해 reshape 합니다.
+        result = model.predict(final2.T)
+        return convert(result)

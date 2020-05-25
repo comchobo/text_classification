@@ -9,3 +9,5 @@ test.py : Diary.py와 Model.py를 읽어들여 문장을 입력받고 감정분�
 결과 :  
 epoch 3 : train loss 0.661 (acc 0.754), test loss 1.045 (acc 0.618)
 epoch 4 : train loss 0.549 (acc 0.796), test loss 1.158 (acc 0.608)
+
+* 현재 우분투 환경에서 실행시 랜덤하게 exception이 raise되는 버그가 존재합니다. 수정중입니다.

@@ -10,3 +10,4 @@ try:
     print(response)
 except:
     print("error occurred") # exception not rethrown 예외처리
+ 

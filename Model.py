@@ -8,10 +8,10 @@ def put(token, sentence, mc):
         sentence2 = []
         sentence.replace('.','').replace(',','').replace('~','').replace('"','')
         sentence2 = mc.morphs(sentence)
-        #if len(sentence2)<2:
-        #    output= token.texts_to_sequences(sentence)
-        #else:
-        output= token.texts_to_sequences(sentence2)
+        if len(sentence2)<2:
+            output= token.texts_to_sequences(sentence)
+        else:
+            output= token.texts_to_sequences(sentence2)
         output = np.array(output)
         return output
 

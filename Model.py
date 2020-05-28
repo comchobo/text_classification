@@ -10,8 +10,10 @@ def put(token, sentence, mc):
         sentence2 = mc.morphs(sentence)
         if len(sentence2)<2:
             output= token.texts_to_sequences(sentence)
+        #학습사전에 없는 단어이거나 매우 짧을 경우 글자 하나하나를 기준으로 분석합니다.
         else:
             output= token.texts_to_sequences(sentence2)
+        #그 외에는 정상적으로 형태소분석 후 치환합니다.
         output = np.array(output)
         return output
 

@@ -11,12 +11,8 @@ dataset.csv는 Sentence, Emotion 열로 구성되어, Emotion에는 중립, 행�
 2. 형태소 정규화 (okt.morphs() 메소드의 norm, stem) 65.85%
 3. 10 bootstrap 모델 68.11%
 4. 각종 특수기호 정규화, 숫자 정규화 67.74%
-5. 토큰수 제한 (thres=2) 69.06%
+5. 토큰수 제한 (빈도수 thres>2) 69.06%
 
 test.py : predict에 Project_model.h5과 wordIndex.json이 필요합니다. Diary.py와 Model.py를 읽어들여 문장을 입력받고 감정분류 리스트를 출력합니다. \n을 기준으로 슬라이싱합니다.
-
-결과 :  
-epoch 3 : train loss 0.661 (acc 0.754), test loss 1.045 (acc 0.618)
-epoch 4 : train loss 0.549 (acc 0.796), test loss 1.158 (acc 0.608)
 
 * 현재 로컬 우분투 환경에서 실행시 랜덤하게 exception이 raise되는 버그가 존재합니다만, 타 환경에서는 문제가 발생하지 않아 보류중입니다.

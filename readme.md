@@ -13,6 +13,4 @@ dataset.csv는 Sentence, Emotion 열로 구성되어, Emotion에는 중립, 행�
 4. 각종 특수기호 정규화, 숫자 정규화 67.74%
 5. 토큰수 제한 (빈도수 thres>2) 69.06%
 
-test.py : predict에 Project_model.h5과 wordIndex.json이 필요합니다. Diary.py와 Model.py를 읽어들여 문장을 입력받고 감정분류 리스트를 출력합니다. \n을 기준으로 슬라이싱합니다.
-
-* 현재 로컬 우분투 환경에서 실행시 랜덤하게 exception이 raise되는 버그가 존재합니다만, 타 환경에서는 문제가 발생하지 않아 보류중입니다.
+test.py : predict에 Project_model.h5과 wordIndex.json이 필요합니다. Diary.py와 Model.py를 읽어들여 문장을 입력받고 감정분류 리스트를 출력합니다. 문장 분리 알고리즘은 다음 패키지를 사용하였습니다. http://docs.likejazz.com/kss/
